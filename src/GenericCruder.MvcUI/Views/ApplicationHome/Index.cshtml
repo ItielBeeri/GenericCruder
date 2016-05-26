@@ -1,0 +1,23 @@
+﻿@model ETL.GenericCruder.MvcUI.Models.ApplicationDetailsVM
+
+@{
+    ViewBag.Title = Model.AppName + " Home";
+}
+<main>
+    <h2>@Model.AppName</h2>
+    <p>
+        This is the home page of <strong>@Model.AppName</strong> application.
+    </p>
+    <p>
+        To manage application data, concatenate <code>/data/[typeName]</code> to the url above, where <code>[typeName]</code> is the name of the entity which you want manage its data.
+    </p>
+    <div>
+        Alternatively, you can use these links to go to type management pages:
+        <div class="list-group">
+            @foreach (string typeName in Model.TypeNames)
+            {
+                <a class="list-group-item" href="@Url.Content("~/"+Model.AppName+"/data/"+typeName)">@typeName</a>
+            }
+        </div>
+    </div>
+</main>

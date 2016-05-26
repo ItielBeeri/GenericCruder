@@ -1,0 +1,17 @@
+﻿@model ETL.GenericCruder.MvcUI.Models.TypeIdentityVM
+
+@{
+    ViewBag.Title = "Entity type not found";
+    Layout = "~/Views/Error/_Layout.cshtml";
+}
+
+<h2>
+    Type not found
+</h2>
+<p>
+    Type <code>@Model.EntityType</code> in application <code>@Model.AppName</code> has not been found.
+</p>
+<p>
+    Try rewrite the URL, or <a href="@Url.Content("~/")">go back to the home page</a>.
+</p>
+

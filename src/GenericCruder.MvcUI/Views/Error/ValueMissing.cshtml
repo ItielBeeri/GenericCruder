@@ -1,0 +1,17 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Value missing";
+    Layout = "~/Views/Error/_Layout.cshtml";
+}
+
+<h2>
+    Value missing
+</h2>
+<p>
+    The last request was missing the value of <code>@Model</code>.
+</p>
+<p>
+    Try rewrite the URL, or <a href="@Url.Content("~/")">go back to the home page</a>.
+</p>
+

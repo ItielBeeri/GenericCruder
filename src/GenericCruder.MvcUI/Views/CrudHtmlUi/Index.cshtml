@@ -1,0 +1,239 @@
+﻿@model ETL.GenericCruder.MvcUI.Models.TypeIdentityVM
+
+@{
+    ViewBag.Title = "Test page to AJAX server";
+}
+
+<main>
+    <header>
+        <h2>Test page to AJAX server</h2>
+        <p>
+
+        </p>
+    </header>
+    <div class="panel-group" id="query-options">
+        <div class="panel hidden">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#query-options" href="#table-query">
+                        Request by pre-structured table
+                    </a>
+                </h3>
+            </div>
+            <div id="table-query" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#query-options" href="#free-query">
+                        Request by free formulation
+                    </a>
+                </h3>
+            </div>
+            <div id="free-query" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <form class="panel">
+                        <div class="panel-heading">
+                            <h4>Request</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="request-url">
+                                    URL
+                                    <br />
+                                    <small>
+                                        To the base path, you can concatenate
+                                        <kbd>GetAll</kbd>,
+                                        <kbd>GetById</kbd>, 
+                                        <kbd>Save</kbd>,
+                                        <kbd>SaveMany</kbd> or
+                                        <kbd>Delete</kbd>
+                                    </small>
+                                </label>
+                                <input type="text" class="form-control" id="request-url" placeholder="Start with protocol or path" />
+                            </div>
+                            <div class="form-group">
+                                <label for="request-body">Body</label>
+                                <input type="text" class="form-control" id="request-body" placeholder="Query string syntax or json" />
+                                <div>
+                                    Use <a href="http://en.wikipedia.org/wiki/Query_string#Web_forms" target="_blank">query string syntax</a>
+                                    or <a href="http://json.org/" target="_blank">JSON</a>. <br />
+                                    Remember that when you send json to server by AJAX, you must set the request's <code>contentType</code> to <code>'application/json'</code>.
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="request-get">GET</button>
+                            <button type="button" class="btn btn-primary" id="request-post">POST</button>
+                            <img src="~/Content/wait.gif" width="20" height="20" class="wait template hidden" />
+                        </div>
+                    </form>
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h4>Response</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table" id="response-table">
+                                <tbody></tbody>
+                            </table>
+                            <div id="source-switch" class="source-switch btn-group hidden" data-toggle="buttons">
+                                <label class="btn btn-default active">
+                                    <input type="radio" name="source-switch" data-mode="source" checked="checked">Source
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" name="source-switch" data-mode="rendered">Rendered
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section styles{
+    <style>
+        html{
+            overflow-y:scroll;
+        }
+
+        pre{
+            width:100%;
+            white-space:pre-wrap;
+        }
+
+        #response-table td:nth-child(2) {
+            word-break: break-all;
+        }
+
+        .source-switch {
+            float: right;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        iframe {
+            width:100%;
+            border:none;
+        }
+
+        .relative{
+            position:relative;
+        }
+
+        div.header{
+            display:table-row;
+        }
+
+        span.header-name{
+            display:table-cell;            
+            white-space:nowrap;
+            padding:0 1em;
+        }
+
+    </style>
+}
+
+@section scripts{
+    <script>
+        if (location.pathname.split('/').length > 3) {
+            history.replaceState(null, '', location.href.replace(/((?:\/\w+){3}).*/, '$1/'));
+        }
+
+        var onFrameLoad = function (iframe) {
+            iframe.height = (iframe.contentWindow.document.body.scrollHeight+50) + "px";
+        };
+
+        var formatContent = function (source, formatting) {
+            var formatted;
+            switch (formatting) {
+                case 'html-source':
+                    formatted = '<pre>' + source.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>';
+                    break;
+                case 'html':
+                    formatted = $('<iframe>').attr('srcdoc', source).attr('onload','onFrameLoad(this)')[0].outerHTML;
+                    break;
+                case 'json':
+                    formatted = '<pre>' + source.replace(/([\[\{\,])/g, '$1<br/>').replace(/([\]\}])/g, '<br/>$1') + '</pre>';
+                    break;
+                case 'headers':
+                    var divOpenTag = '<div class="header"><span class="header-name">';
+                    formatted = divOpenTag
+                        + source.replace(/((?:^|\n)[^\:]*:)/g, '$1</span>')
+                        .replace(/\n([^\:]*:)/g, '</div>' + divOpenTag + '$1');
+                    break;
+            }
+            return formatted;
+        };
+
+        var createDisplayContent = function (source, contentType) {
+            var htmlToDisplay;
+            var isHtml = contentType.indexOf('html') >= 0, isJson = contentType.indexOf('json') >= 0;
+            var $wrapper = $('<div>').addClass('relative');
+            if (isHtml) {
+                htmlToDisplay = $wrapper
+                    .append($('#source-switch').clone(true, true).removeAttr('id').removeClass('hidden'))
+                    .append($('<div>').addClass('body-content').data('source', source).html(formatContent(source, 'html-source')));
+            }
+            if (isJson) {
+                htmlToDisplay = $wrapper.append($('<div>').addClass('body-content').data('source', source).html(formatContent(source, 'json')));
+            }
+            return $wrapper;
+        }
+
+        var createResponseRow = function (name, value) {
+            var $valueTd = $('<td>');
+            if (typeof value == "string") {
+                $valueTd.html(value);
+            } else {
+                $valueTd.append(value);
+            }
+            return $('<tr>').append($('<td>').text(name)).append($valueTd).appendTo('#response-table>tbody');
+        };
+
+        $(function () {
+            $('#request-url').val(location.href).on('input', function (e) {
+                if ($(this).val().indexOf(location.href) < 0) {
+                    $(this).val(location.href);
+                }
+            });
+            $('[name="source-switch"]').parent('label').click(function () {
+                var $contentDiv = $(this).parents('.source-switch').siblings('.body-content');
+                $contentDiv.html(formatContent($contentDiv.data('source'), $(this).children('input').data('mode') == 'source' ? 'html-source' : 'html'));
+            });
+            $('#request-get, #request-post').click(function () {
+                var $clicked = $(this);
+                $('.wait.template').clone().removeClass('hidden template').appendTo($(this));
+                $('#response-table>tbody>tr').remove();
+                var data = $('#request-body').val();
+                var isJson = true;
+                try {
+                    JSON.parse(data);
+                } catch (e) {
+                    isJson = false;
+                }
+                $.ajax({
+                    url: $('#request-url').val(),
+                    method: $(this).text(),
+                    data: data,
+                    contentType: isJson ? 'application/json' : 'application/x-www-form-urlencoded',
+                    //timeout:15000,
+                    complete: function (jqXHR) {
+                        createResponseRow('Status', jqXHR.status + ' ' + jqXHR.statusText);
+                        if (jqXHR.getAllResponseHeaders()) {
+                            createResponseRow('Headers', formatContent(jqXHR.getAllResponseHeaders(), 'headers'))//.replace(/\n/g, '<br/>'));
+                        }
+                        if (jqXHR.responseText) {
+                            createResponseRow('Body', createDisplayContent(jqXHR.responseText, jqXHR.getResponseHeader('content-type')));
+                        }
+                        $clicked.find('.wait').remove();
+                    }
+                });
+            })
+        });
+    </script>
+}
