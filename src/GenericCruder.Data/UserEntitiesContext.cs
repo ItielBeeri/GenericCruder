@@ -8,33 +8,36 @@ using ETL.GenericCruder.UserEntities.Cars;
 //using ETL.GenericCruder.UserEntities.People;
 using System.Data.Entity.Infrastructure;
 using ETL.GenericCruder.Data.Migrations;
-using ETL.GenericCruder.UserEntities.Kitchen;
-using ETL.GenericCruder.UserEntities.Restaurant;
+//using ETL.GenericCruder.UserEntities.Kitchen;
+//using ETL.GenericCruder.UserEntities.Restaurant;
 using ETL.GenericCruder.UserEntities.Gantt;
 using ETL.GenericCruder.UserEntities.HouseCommittee;
+using ETL.GenericCruder.UserEntities.GmachHon;
+using ETL.GenericCruder.UserEntities.InviteesManager;
+using ETL.GenericCruder.UserEntities.ReturningLost;
 
 namespace ETL.GenericCruder.Data
 {
-    public class UserEntitiesContext :DbContext
+    public class UserEntitiesContext : DbContext
     {
         //public DbSet<Task> Tasks { get; set; }
         public DbSet<Car> Cars { get; set; }
         //public DbSet<Person> People { get; set; }
 
-        //kitchen
-        public DbSet<product> Products { get; set; }
-        public DbSet<vegetableAndFruit> VegetablesAndFruits { get; set; }
-        public DbSet<receipe> Receipes { get; set; }
-        public DbSet<card> Cards { get; set; }
-        public DbSet<image> Images { get; set; }
+        ////kitchen
+        //public DbSet<product> Products { get; set; }
+        //public DbSet<vegetableAndFruit> VegetablesAndFruits { get; set; }
+        //public DbSet<receipe> Receipes { get; set; }
+        //public DbSet<card> Cards { get; set; }
+        //public DbSet<image> Images { get; set; }
 
-        //restaurant
-        public DbSet<person> Persons { get; set; }
-        public DbSet<clubMember> ClubMembers { get; set; }
-        public DbSet<reaction> Reactions { get; set; }
-        public DbSet<account> Accounts { get; set; }
-        public DbSet<payCardInvitation> payCardInvitations { get; set; }
-        
+        ////restaurant
+        //public DbSet<person> Persons { get; set; }
+        //public DbSet<clubMember> ClubMembers { get; set; }
+        //public DbSet<reaction> Reactions { get; set; }
+        //public DbSet<account> Accounts { get; set; }
+        //public DbSet<payCardInvitation> payCardInvitations { get; set; }
+
         //gantt
         public DbSet<task> Tasks { get; set; }
         public DbSet<simTask> SimTasks { get; set; }
@@ -46,13 +49,27 @@ namespace ETL.GenericCruder.Data
         public DbSet<Task> HouseTasks { get; set; }
         public DbSet<Message> HouseMessages { get; set; }
 
+        //gmachhon
+        public DbSet<contact> Contacts { get; set; }
+        public DbSet<transaction> Transactions { get; set; }
+
+        //InviteesManager
+        public DbSet<user> Users { get; set; }
+        public DbSet<@event> Events { get; set; }
+        public DbSet<invitee> Invitees { get; set; }
+
+        //ReturningLost
+        public DbSet<person> Persons { get; set; }
+        public DbSet<product> Products { get; set; }
+        public DbSet<sign> Signs { get; set; }
+
         public UserEntitiesContext()
         {
             Database.SetInitializer<UserEntitiesContext>(new MigrateDatabaseToLatestVersion<UserEntitiesContext, Configuration>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {            
+        {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Task>().ToTable("Tasks", typeof(Task).Namespace.Split('.').Last());

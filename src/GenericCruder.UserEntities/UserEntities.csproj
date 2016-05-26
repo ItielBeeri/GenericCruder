@@ -41,13 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="GmachHon.cs" />
     <Compile Include="Gantt.cs" />
     <Compile Include="HouseCommittee.cs" />
     <Compile Include="Kitchen.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restaurant.cs" />
+    <Compile Include="ReturningLost.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="InviteesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenericCruder.Core\Core.csproj">
