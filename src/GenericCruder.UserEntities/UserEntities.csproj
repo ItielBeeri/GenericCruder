@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="Catering.cs" />
     <Compile Include="GmachHon.cs" />
     <Compile Include="Gantt.cs" />
     <Compile Include="HouseCommittee.cs" />

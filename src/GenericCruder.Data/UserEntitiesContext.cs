@@ -15,6 +15,7 @@ using ETL.GenericCruder.UserEntities.HouseCommittee;
 using ETL.GenericCruder.UserEntities.GmachHon;
 using ETL.GenericCruder.UserEntities.InviteesManager;
 using ETL.GenericCruder.UserEntities.ReturningLost;
+using ETL.GenericCruder.UserEntities.Catering;
 
 namespace ETL.GenericCruder.Data
 {
@@ -62,6 +63,10 @@ namespace ETL.GenericCruder.Data
         public DbSet<person> Persons { get; set; }
         public DbSet<product> Products { get; set; }
         public DbSet<sign> Signs { get; set; }
+
+        //Catering
+        public DbSet<order> Orders { get; set; }
+        public DbSet<meal> Meals { get; set; }
 
         public UserEntitiesContext()
         {
