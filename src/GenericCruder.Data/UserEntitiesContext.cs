@@ -16,6 +16,7 @@ using ETL.GenericCruder.UserEntities.GmachHon;
 using ETL.GenericCruder.UserEntities.InviteesManager;
 using ETL.GenericCruder.UserEntities.ReturningLost;
 using ETL.GenericCruder.UserEntities.Catering;
+using ETL.GenericCruder.UserEntities.BookStore;
 
 namespace ETL.GenericCruder.Data
 {
@@ -67,6 +68,12 @@ namespace ETL.GenericCruder.Data
         //Catering
         public DbSet<order> Orders { get; set; }
         public DbSet<meal> Meals { get; set; }
+
+        //BookStore
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<OrderStatus> OrdersStatus { get; set; }
+        public DbSet<CashRegister> CashRegisters { get; set; }
 
         public UserEntitiesContext()
         {
