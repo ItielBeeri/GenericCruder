@@ -43,7 +43,7 @@ namespace ETL.GenericCruder.UserEntities.BookStore
         public string bookName { get; set; }// שם הספר
         public string author { get; set; }// מחבר
         public string category { get; set; }// קטגוריה
-        public float price { get; set; }// מחיר
+        public float? price { get; set; }// מחיר
 
         int IHasId.Id
         {
@@ -87,10 +87,10 @@ namespace ETL.GenericCruder.UserEntities.BookStore
         // פרטי התשלום של הלקוח
         public string cardNumber { get; set; }// מספר כרטיס אשראי
         public string validity { get; set; }// תוקף הכרטיס
-        public int CVV { get; set; }// ספרות בטיחות בגב הכרטיס
-        public int IDCardholder { get; set; }// תעודת הזהות של בעל הכרטיס
+        public int? CVV { get; set; }// ספרות בטיחות בגב הכרטיס
+        public int? IDCardholder { get; set; }// תעודת הזהות של בעל הכרטיס
         public string name { get; set; }// שם מלא
-        public int numberPayment { get; set; }// מספר תשלומים לפריסה בכרטיס
+        public int? numberPayment { get; set; }// מספר תשלומים לפריסה בכרטיס
 
         int IHasId.Id
         {
