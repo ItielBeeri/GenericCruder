@@ -32,7 +32,7 @@ namespace ETL.GenericCruder.UserEntities.GmachHon
         public int transactionId { get; set; } //מזהה
         public string transactionType { get; set; }//סוג התנועה: Loan\ReturnLoan\Deposit\ReturnDeposit\Donation
         public int? contactId { get; set; }
-        public virtual contact contact { get; set; }// איש קשר מבצע הפעולה
+        public contact contact { get; set; }// איש קשר מבצע הפעולה
         public double amount { get; set; }//סכום
         public DateTime transactionDate { get; set; } //תאריך התנועה
 
