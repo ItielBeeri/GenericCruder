@@ -14,7 +14,7 @@ namespace ETL.GenericCruder.UserEntities.GmachHon
         public string mobileNumber { get; set; } //נייד
         public string address { get; set; } //כתובת
         public string remarks { get; set; } //הערות
-        public virtual ICollection<transaction> transactions { get; set; }
+        public ICollection<transaction> transactions { get; set; }
         int IHasId.Id
         {
             get
