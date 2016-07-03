@@ -41,7 +41,7 @@ namespace ETL.GenericCruder.UserEntities.Catering
         public string mealName { get; set; } //שם המנה
         public int? price { get; set; } //מחיר
         public int? quantity { get; set; } //כמות שהוזמנה
-        public int orderId { get; set; }
+        public int? orderId { get; set; }
 
         int IHasId.Id
         {
