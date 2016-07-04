@@ -1,6 +1,7 @@
 ﻿using ETL.GenericCruder.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace ETL.GenericCruder.UserEntities.ReturningLost
     public class product : IHasId
     {
         public int productId { get; set; }//מזהה מוצר
-        public virtual person found { get; set; }//הלקוח המפרסם מוצר זה (המוצא
+        public int personId { get; set; }//הלקוח המפרסם מוצר זה (המוצא
         public string name { get; set; }//שם המוצר
         public DateTime date { get; set; }//תאריך מציאת המוצר
         public string city { get; set; }//עיר מציאת המוצר *
@@ -62,7 +63,7 @@ namespace ETL.GenericCruder.UserEntities.ReturningLost
     public class sign : IHasId
     {
         public int signId { get; set; }//מזהה לסימן 
-        public virtual product prod { get; set; }//קישור הסימן למוצר (למוצר אחד כמה סימנים ולכן מוצר אחד מקושר רבות 
+        public int productId { get; set; }//קישור הסימן למוצר (למוצר אחד כמה סימנים ולכן מוצר אחד מקושר רבות 
         public string question { get; set; }// השאלה בעצמה (שאלה לתשובה נכון/לא נכון
         public Boolean answer { get; set; }//התשובה לשאלה
 
