@@ -14,7 +14,7 @@ namespace ETL.GenericCruder.UserEntities.GmachHon
         public string mobileNumber { get; set; } //נייד
         public string address { get; set; } //כתובת
         public string remarks { get; set; } //הערות
-        public virtual ICollection<transaction> transactions { get; set; }
+        public ICollection<transaction> transactions { get; set; }
         int IHasId.Id
         {
             get
@@ -32,7 +32,7 @@ namespace ETL.GenericCruder.UserEntities.GmachHon
         public int transactionId { get; set; } //מזהה
         public string transactionType { get; set; }//סוג התנועה: Loan\ReturnLoan\Deposit\ReturnDeposit\Donation
         public int? contactId { get; set; }
-        public virtual contact contact { get; set; }// איש קשר מבצע הפעולה
+        public contact contact { get; set; }// איש קשר מבצע הפעולה
         public double amount { get; set; }//סכום
         public DateTime transactionDate { get; set; } //תאריך התנועה
 

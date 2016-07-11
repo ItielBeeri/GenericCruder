@@ -37,7 +37,7 @@ namespace ETL.GenericCruder.UserEntities.InviteesManager
         public string place { get; set; }//מקום
         public string address { get; set; }//כתובת
         public string date { get; set; }//תאריך
-        public virtual user User { get; set; }
+        public int userId { get; set; }
         public virtual ICollection<invitee> invitees { get; set; }// רשימת המוזמנים לאירוע
 
         int IHasId.Id
@@ -61,7 +61,7 @@ namespace ETL.GenericCruder.UserEntities.InviteesManager
         public string mail { get; set; }//דואל
         public bool? isComing { get; set; }//האם אישר השתתפותו
         public string randomUrl { get; set; }
-        public virtual @event @event { get; set; }
+        public int eventId { get; set; }
 
         int IHasId.Id
         {
