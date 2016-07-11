@@ -60,6 +60,7 @@ namespace ETL.GenericCruder.UserEntities.InviteesManager
         public string inviteeName { get; set; }//מוזמן
         public string mail { get; set; }//דואל
         public bool? isComing { get; set; }//האם אישר השתתפותו
+        public string randomUrl { get; set; }
         public virtual @event @event { get; set; }
 
         int IHasId.Id
