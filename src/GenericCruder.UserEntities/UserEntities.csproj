@@ -53,6 +53,11 @@
     <Compile Include="ReturningLost.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="InviteesManager.cs" />
+    <Compile Include="MusicSchool.cs" />
+    <Compile Include="ProjectManagement.cs" />
+    <Compile Include="KidumNoar.cs" />
+    <Compile Include="Nibit.cs" />
+    <Compile Include="WhereHouse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenericCruder.Core\Core.csproj">
