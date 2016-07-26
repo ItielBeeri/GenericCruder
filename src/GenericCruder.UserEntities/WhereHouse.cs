@@ -8,7 +8,7 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
     {
         public int LocationId { get; set; }
 
-        public int? UserId { get; set; } // the user who added 
+        public int? WhereHouseUserId { get; set; } // the user who added 
 
         public string Name { get; set; } // The item name
 
@@ -30,11 +30,11 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
     }
 
     // item's category
-    public class Category : IHasId
+    public class WhereHouseCategory : IHasId
     {
-        public int CategoryId { get; set; }
+        public int WhereHouseCategoryId { get; set; }
 
-        public int? UserId { get; set; } // the user who added 
+        public int? WhereHouseUserId { get; set; } // the user who added 
 
         public string Name { get; set; } // The item name
 
@@ -46,11 +46,11 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
         {
             get
             {
-                return CategoryId;
+                return WhereHouseCategoryId;
             }
             set
             {
-                CategoryId = value;
+                WhereHouseCategoryId = value;
             }
         }
     }
@@ -60,11 +60,11 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
     {
         public int ItemId { get; set; }
 
-        public int? UserId { get; set; } // the user who inserted the item
+        public int? WhereHouseUserId { get; set; } // the user who inserted the item
 
         public string Name { get; set; } // item's name
 
-        public virtual ICollection<Category> Category { get; set; } // item's categories
+        public virtual ICollection<WhereHouseCategory> Categories { get; set; } // item's categories
 
         public int? LocationId { get; set; } // item's location
 
@@ -82,9 +82,9 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
     }
 
     // user details
-    public class User :IHasId
+    public class WhereHouseUser :IHasId
     {
-        public int UserId { get; set; }
+        public int WhereHouseUserId { get; set; }
 
         public string Name { get; set; }
 
@@ -92,7 +92,7 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
 
         public virtual ICollection<Location> Locations { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<WhereHouseCategory> Categories { get; set; }
 
         public virtual ICollection<Item> Items { get; set; }
 
@@ -100,11 +100,11 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
         {
             get
             {
-                return UserId;
+                return WhereHouseUserId;
             }
             set
             {
-                UserId = value;
+                WhereHouseUserId = value;
             }
         }
     }
