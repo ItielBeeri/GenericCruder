@@ -1,5 +1,6 @@
 ﻿using ETL.GenericCruder.Core;
 using System.Collections.Generic;
+using System;
 
 namespace ETL.GenericCruder.UserEntities.WhereHouse
 {
@@ -77,6 +78,28 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
             set
             {
                 ItemId = value;
+            }
+        }
+    }
+
+    public class ItemCategoryRelation : IHasId
+    {
+        public int ItemCategoryRelationId { get; set; }
+
+        public int ItemId { get; set; }
+
+        public int CategoryId { get; set; }
+
+        int IHasId.Id
+        {
+            get
+            {
+                return ItemCategoryRelationId;
+            }
+
+            set
+            {
+                ItemCategoryRelationId = value;
             }
         }
     }
