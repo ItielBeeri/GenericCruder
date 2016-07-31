@@ -41,7 +41,7 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
 
         public string Description { get; set; } // The item description
 
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<ItemCategoryRelation> Items { get; set; }
 
         int IHasId.Id
         {
@@ -65,7 +65,7 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
 
         public string Name { get; set; } // item's name
 
-        public virtual ICollection<WhereHouseCategory> Categories { get; set; } // item's categories
+        public virtual ICollection<ItemCategoryRelation> Categories { get; set; } // item's categories
 
         public int? LocationId { get; set; } // item's location
 
@@ -88,7 +88,7 @@ namespace ETL.GenericCruder.UserEntities.WhereHouse
 
         public int ItemId { get; set; }
 
-        public int CategoryId { get; set; }
+        public int WhereHouseCategoryId { get; set; }
 
         int IHasId.Id
         {

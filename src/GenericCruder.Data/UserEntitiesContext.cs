@@ -113,6 +113,7 @@ namespace ETL.GenericCruder.Data
         public DbSet<WhereHouse.Item> Items { get; set; }
         public DbSet<WhereHouse.Location> Locations { get; set; }
         public DbSet<WhereHouse.WhereHouseUser> WhereHouseUsers { get; set; }
+        public DbSet<WhereHouse.ItemCategoryRelation> ItemCategoryRelations { get; set; }
 
 
         public UserEntitiesContext()
@@ -179,6 +180,7 @@ namespace ETL.GenericCruder.Data
             modelBuilder.Entity<WhereHouse.Item>().ToTable("Items", typeof(WhereHouse.Item).Namespace.Split('.').Last());
             modelBuilder.Entity<WhereHouse.Location>().ToTable("Locations", typeof(WhereHouse.Location).Namespace.Split('.').Last());
             modelBuilder.Entity<WhereHouse.WhereHouseUser>().ToTable("Users", typeof(WhereHouse.WhereHouseUser).Namespace.Split('.').Last());
+            modelBuilder.Entity<WhereHouse.ItemCategoryRelation>().ToTable("ItemCategoryRelations", typeof(WhereHouse.ItemCategoryRelation).Namespace.Split('.').Last());
 
         }
     }
