@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ETL.GenericCruder.UserEntities.ProjectManagement
 {
     //משתמשי המערכת, מיועד ללוגין ולצורך הצגה ברשימה המפרטת את משתמשי המערכת אליהם ניתן להפנות משימות או באגים
-    public class User : IHasId
+    public class ProjectManagementUser : IHasId
     {
         public int ProjectManagementUserId { get; set; }//מזהה
         public string firstName { get; set; } //שם פרטי
@@ -15,8 +15,8 @@ namespace ETL.GenericCruder.UserEntities.ProjectManagement
         public string permission { get; set; } // סוג הרשאה
 
         public virtual ICollection<Design> designs { get; set; }
-        public virtual ICollection<Task> ownedTasks { get; set; }
-        public virtual ICollection<Task> assigedTasks { get; set; }
+        public virtual ICollection<ProjectManagementTask> ownedTasks { get; set; }
+        public virtual ICollection<ProjectManagementTask> assigedTasks { get; set; }
         public virtual ICollection<Bug> ownedBugs { get; set; }
         public virtual ICollection<Bug> assignedBugs { get; set; }
 
@@ -40,7 +40,7 @@ namespace ETL.GenericCruder.UserEntities.ProjectManagement
         public string categoryName { get; set; } //שם הקטגוריה   
 
         public virtual ICollection<Design> designs { get; set; }
-        public virtual ICollection<Task> tasks { get; set; }
+        public virtual ICollection<ProjectManagementTask> tasks { get; set; }
         public virtual ICollection<Bug> bugs { get; set; }
 
         int IHasId.Id
@@ -82,9 +82,9 @@ namespace ETL.GenericCruder.UserEntities.ProjectManagement
     }
 
     // מחלקה זו מייצגת משימה במערכת
-    public class Task :IHasId
+    public class ProjectManagementTask :IHasId
     {
-        public int TaskId { get; set; } //מזהה
+        public int ProjectManagementTaskId { get; set; } //מזהה
         public string titleName { get; set; } //כותרת המשימה
         public string description { get; set; } // פירוט
         public string status { get; set; } // סטטוס המשימה
@@ -101,11 +101,11 @@ namespace ETL.GenericCruder.UserEntities.ProjectManagement
         {
             get
             {
-                return TaskId;
+                return ProjectManagementTaskId;
             }
             set
             {
-                TaskId = value;
+                ProjectManagementTaskId = value;
             }
         }
     }
@@ -146,7 +146,7 @@ namespace ETL.GenericCruder.UserEntities.ProjectManagement
         public string fileContent { get; set; }
         
         public int? DesignId { get; set; }
-        public int? TaskId { get; set; }
+        public int? ProjectManagementTaskId { get; set; }
         public int? BugId { get; set; }
 
         int IHasId.Id

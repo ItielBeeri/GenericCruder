@@ -1,6 +1,7 @@
 ﻿using ETL.GenericCruder.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,6 +11,7 @@ namespace ETL.GenericCruder.UserEntities.Nibit
    //מחלקה זו מתארת את הפעילויות השונות המתבצעות בתוך כל משימה
    public class Activity : IHasId
    {
+        [Key]
        public int ActivityId { get; set; }//מספור אוטומטי
        public string Title { get; set; }//תאור הפעילות
        public DateTime? Start { get; set; }//זמן תחילת הפעילות 
@@ -18,7 +20,7 @@ namespace ETL.GenericCruder.UserEntities.Nibit
        public float? Priority { get; set; }// עדיפות
        public int? Status { get; set; }//סטטוס פעילות
 
-       public int? TaskId { get; set; }
+       public int? ParentTaskId { get; set; }
        public int? ActualWorker { get; set; }//עובד נוכחי לפעילות
 
        int IHasId.Id
@@ -36,14 +38,14 @@ namespace ETL.GenericCruder.UserEntities.Nibit
 
     //מחלקת משימות
     //מחלקה זו מתארת את המשימות ובקשות הלקוחות מצוות התמיכה מחלקה זו יורשת ממחלקת פעילויות
-   public class Task : Activity
+   public class NibitTask : Activity
     {
        public string NameAsk { get; set;}//שם מבקש המשימה 
        public string Phone { get; set; }//טלפון ליצירת קשר
 
        public int? WorkerId { get; set; }//קוד עובד
        public int? ClientId { get; set; }//קוד לקוח
-       public int? ProductId { get; set; }//קוד מוצר תקול
+       public int? NibitProductId { get; set; }//קוד מוצר תקול
        
        public ICollection<Activity> Activities { get; set; }//רשימת פעילויות למשימה
     }
@@ -59,7 +61,7 @@ namespace ETL.GenericCruder.UserEntities.Nibit
         public string Email { get; set; }//מייל עובד
 
         public virtual ICollection<Activity> Activities { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<NibitTask> Tasks { get; set; }
 
         int IHasId.Id
         {
@@ -81,7 +83,7 @@ namespace ETL.GenericCruder.UserEntities.Nibit
         public string Name { get; set; }//שם לקוח
         public string Osek_m { get; set; }//עוסק מורשה
 
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<NibitTask> Tasks { get; set; }
 
         int IHasId.Id
         {
@@ -97,46 +99,46 @@ namespace ETL.GenericCruder.UserEntities.Nibit
     }
     //מחלקת קטגוריות
     //קטגוריות המוצרים המוצעים בחברה
-    public class Category : IHasId
+    public class NibitCategory : IHasId
     {
-        public int CategoryId { get; set; }//מספור אוטומטי
+        public int NibitCategoryId { get; set; }//מספור אוטומטי
         public string Name { get; set; }//שם קטגוריות
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<NibitProduct> Products { get; set; }
 
         int IHasId.Id
         {
             get
             {
-                return CategoryId;
+                return NibitCategoryId;
             }
             set
             {
-                CategoryId = value;
+                NibitCategoryId = value;
             }
         }
     }
 
     //מחלקת מוצרים
     //מגון מוצרי החברה עליהם ניתן השירות
-    public class Product : IHasId
+    public class NibitProduct : IHasId
     {
-        public int ProductId { get; set; }//מספור אוטומטי
+        public int NibitProductId { get; set; }//מספור אוטומטי
         public string Name { get; set; }//שם מוצר
         
-        public int? category { get; set; }//קטגורית מוצר
+        public int? NibitCategoryId { get; set; }//קטגורית מוצר
 
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<NibitTask> Tasks { get; set; }
 
         int IHasId.Id
         {
             get
             {
-                return ProductId;
+                return NibitProductId;
             }
             set
             {
-                ProductId = value;
+                NibitProductId = value;
             }
         }
     }

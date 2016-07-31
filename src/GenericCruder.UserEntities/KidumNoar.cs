@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace ETL.GenericCruder.UserEntities.KidumNoar
 {
-    public class person : IHasId  //מחלקה המייצגת אנשים
+    public class kidumPerson : IHasId  //מחלקה המייצגת אנשים
     {
-        public int personId { get; set; } //מזהה אדם
+        public int kidumPersonId { get; set; } //מזהה אדם
         public string idNumber { get; set; } //מספר תעודת זהות
         public string name { get; set; } // שם
 
@@ -25,11 +25,11 @@ namespace ETL.GenericCruder.UserEntities.KidumNoar
         {
             get
             {
-                return personId;
+                return kidumPersonId;
             }
             set
             {
-                personId = value;
+                kidumPersonId = value;
             }
         }
     }

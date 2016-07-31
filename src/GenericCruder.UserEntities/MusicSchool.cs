@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ETL.GenericCruder.UserEntities.MusicSchool
 {
-    public class User : IHasId
+    public class MusicSchoolUser : IHasId
     {
         public int MusicSchoolUserId { get; set; }
         public string Name { get; set; }
@@ -30,7 +30,7 @@ namespace ETL.GenericCruder.UserEntities.MusicSchool
         public string Name { get; set; }
         public string Author { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public int MusicSchoolUserId { get; set; }
+        public int? MusicSchoolUserId { get; set; }
         public virtual ICollection<SongRow> Content { get; set; }
 
         int IHasId.Id
@@ -51,7 +51,7 @@ namespace ETL.GenericCruder.UserEntities.MusicSchool
         public int SongRowId { get; set; }
         public string Accords { get; set; }
         public string Lyrics { get; set; }
-        public int SongId { get; set; }
+        public int? SongId { get; set; }
 
         int IHasId.Id
         {
