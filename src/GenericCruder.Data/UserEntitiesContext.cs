@@ -22,6 +22,7 @@ using ETL.GenericCruder.UserEntities.ProjectManagement;
 using Kidum = ETL.GenericCruder.UserEntities.KidumNoar;
 using Nibit = ETL.GenericCruder.UserEntities.Nibit;
 using WhereHouse = ETL.GenericCruder.UserEntities.WhereHouse;
+using ETL.GenericCruder.UserEntities.Apartment;
 
 namespace ETL.GenericCruder.Data
 {
@@ -115,6 +116,10 @@ namespace ETL.GenericCruder.Data
         public DbSet<WhereHouse.WhereHouseUser> WhereHouseUsers { get; set; }
         public DbSet<WhereHouse.ItemCategoryRelation> ItemCategoryRelations { get; set; }
 
+        //Apartment
+        public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<Advertiser> Advertiser { get; set; }
+
 
         public UserEntitiesContext()
         {
@@ -172,7 +177,7 @@ namespace ETL.GenericCruder.Data
             modelBuilder.Entity<Nibit.NibitTask>().HasMany(t => t.Activities).WithOptional().HasForeignKey(a => a.ParentTaskId);
             modelBuilder.Entity<Nibit.Worker>().HasMany(w => w.Activities).WithOptional().HasForeignKey(a => a.ActualWorker);
 
-            
+
 
 
             //WhereHouse
@@ -181,6 +186,10 @@ namespace ETL.GenericCruder.Data
             modelBuilder.Entity<WhereHouse.Location>().ToTable("Locations", typeof(WhereHouse.Location).Namespace.Split('.').Last());
             modelBuilder.Entity<WhereHouse.WhereHouseUser>().ToTable("Users", typeof(WhereHouse.WhereHouseUser).Namespace.Split('.').Last());
             modelBuilder.Entity<WhereHouse.ItemCategoryRelation>().ToTable("ItemCategoryRelations", typeof(WhereHouse.ItemCategoryRelation).Namespace.Split('.').Last());
+
+            //Apartment
+            modelBuilder.Entity<Advertisement>().ToTable("Advertisements", typeof(Advertisement).Namespace.Split('.').Last());
+            modelBuilder.Entity<Advertiser>().ToTable("Advertisers", typeof(Advertiser).Namespace.Split('.').Last());
 
         }
     }
