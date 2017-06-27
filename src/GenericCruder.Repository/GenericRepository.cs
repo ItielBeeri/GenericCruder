@@ -92,54 +92,6 @@ namespace ETL.GenericCruder.Repository
                     _context.Entry(item).State = EntityState.Modified;
                 }
             }
-
-            //_set.Attach(entity);
-            //if (!scannedObjects.Contains(entity))
-            //{
-            //    scannedObjects.Add(entity);
-            //    MethodInfo genericSaveMethod = this.GetType().GetMethod("Save", BindingFlags.NonPublic);
-            //    ObjectContext objContext = ((IObjectContextAdapter)_context).ObjectContext;
-            //    MethodInfo genericCreateSetMethod = objContext.GetType().GetMethod("CreateObjectSet", new Type[] { });
-            //    MethodInfo createSetMethod = genericCreateSetMethod.MakeGenericMethod(typeof(ET));
-            //    dynamic set = createSetMethod.Invoke(objContext, null);
-            //    foreach (dynamic prop in set.EntitySet.ElementType.NavigationProperties)
-            //    {
-            //        string propertyName = prop.Name;
-            //        Type propertyType = typeof(ET).GetProperty(propertyName).PropertyType;
-            //        bool isCollection = typeof(IEnumerable).IsAssignableFrom(propertyType);
-            //        if (isCollection)
-            //        {
-            //            MethodInfo saveMethod = genericSaveMethod.MakeGenericMethod(propertyType.GetGenericArguments().Single());
-            //            foreach (var item in (IEnumerable)_context.Entry(entity).Collection(propertyName).CurrentValue)
-            //            {
-            //                saveMethod.Invoke(this, new object[] { item, null, null });
-            //            }
-            //        }
-            //        else
-            //        {
-            //            MethodInfo saveMethod = genericSaveMethod.MakeGenericMethod(propertyType);
-            //            saveMethod.Invoke(this, new object[] { _context.Entry(entity).Reference(propertyName).CurrentValue });
-            //        }
-            //    }
-
-            //    if (entity.Id == 0)
-            //    {
-            //        _context.Entry(entity).State = EntityState.Added;
-            //        if (inserted != null)
-            //        {
-            //            inserted.Add(entity);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        _context.Entry(entity).State = EntityState.Modified;
-            //        if (updated != null)
-            //        {
-            //            updated.Add(entity);
-            //        }
-            //    }
-            //((IObjectContextAdapter)_context).ObjectContext.CreateObjectSet<T>(.EntitySet.ElementType.NavigationProperties.First().Name;
-            //}
         }
 
         private void ScanGraph(IHasId entity, HashSet<object> toAdd, HashSet<object> other)
